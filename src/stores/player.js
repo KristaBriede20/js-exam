@@ -4,15 +4,16 @@ export const player = reactive({
     playlist   : [],
     now_playing: {}, // SONG OBJECT
     setPlaylist(songs) {
-
+        this.playlist.push(songs); //ar push masivam pievieno mainigo
     },
     setNowPlaying(song) {
-
+       
     },
     getNowPlayingSongId() {
         return this.now_playing?.id;
     },
     getNowPlaying() {
+        return this.now_playing; //atgriez mainigo now_playing
 
     },
     getNowPlayingAlbumID() {
@@ -31,10 +32,10 @@ export const player = reactive({
         return this.now_playing?.preview_url;
     },
     getNextSong(){
-
+      
     },
     getPreviousSong() {
-
+       
     },
     resetNowPlaying() {
         this.now_playing = {};
