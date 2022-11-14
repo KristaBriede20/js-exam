@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-
+import router from './src/router';
 
 export const auth = reactive ({
     user : {
@@ -19,13 +19,13 @@ export const auth = reactive ({
         if(email == "krista.briede@va.lv" && password == "123456"){
         localStorage.is_authenticated = true;
           this.is_authenticated = true;
-          router.push('/')
+          router.replace('/')
         }
     },
     logout(){
         localStorage.clear();
     is_authenticated = false;
-        router.push('/login')
+        router.replace('/login')
     },
     toggleFavorite(songID){
        for(i = 0; i<=this.favorite_songs.length; i++){

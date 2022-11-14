@@ -1,17 +1,24 @@
 <template>
-    <Header>
-        <div v-if = "auth.is_authenticated == true">
-           <Navigation class="show"></Navigation>
-         </div>
-    </Header>
+    <Header v-if="auth.is_authenticated"></Header>
     <div id="section-body">
+        <NavigationComponent v-if="auth.is_authenticated" />
         <router-view class="section-router"></router-view>
     </div>
-    <div id="section-player" >
+    <div id="section-player" v-if="auth.is_authenticated">
         <AudioPlayer />
     </div>
 </template>
+
+
 <script>
-import {auth} from "/auth.js"
-import Navigation from './components/NavigationComponent.vue'
+import { auth } from '/auth'
+import NavigationComponent from './components/NavigationComponent.vue'
+export default {
+    components: { NavigationComponent },
+    data() {
+        return {
+            auth
+        }
+    }
+}
 </script>
