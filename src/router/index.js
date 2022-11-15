@@ -5,6 +5,8 @@ import {auth} from "/auth.js"
 // Importējam vēlamos skatus kurus gribam izmantot
 import Login from '@/views/Login.vue'
 import Songs from '@/views/Songs.vue'
+import Albums from '@/views/Albums.vue'
+import About from '@/views/About.vue'
 
 // Definējam routes datu masīvu
 // Katrs objekts iekš šī datu masīva kalpo kā rūtera adrese
@@ -19,6 +21,15 @@ const routes = [
         path: '/',
         component: Songs,
     },
+    {
+        path: '/albums',
+        component: Albums,
+    },
+    {
+        path: '/about',
+        component: About,
+    },
+
 ]
 
 const router = createRouter({

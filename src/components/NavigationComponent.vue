@@ -1,16 +1,20 @@
 <template>
-<nav id="nav-main" class="wrapper-navigation">
-            <ol>
-                <li>
-                    <a href="/">SONGS</a>
-                </li>
-                <li>
-                    <a href="/albums">ALBUMS</a>
-                </li>
-                <li>
-                    <a href="/about">ABOUT</a>
-                </li>
-            </ol>
-        </nav>
-
+  <nav id="nav-main" class="wrapper-navigation">
+    <ol>
+      <li v-for="address in addresses">
+        <RouterLink :to="{ path: address.path }">{{ address.name }}</RouterLink>
+      </li>
+    </ol>
+  </nav>
 </template>
+
+<script>
+export default {
+  name: "NavigationComponent",
+  data() {
+    return {
+      addresses: [{ path: "/", name: "SONGS" }, { path: "/albums", name: "ALBUMS" }, { path: "/about", name: "ABOUT" }]
+    }
+  }
+}
+</script>

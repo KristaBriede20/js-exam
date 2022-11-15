@@ -1,4 +1,3 @@
-
 <template>
     <div id="main-header" class="active">
         <div class="wrapper-logo">

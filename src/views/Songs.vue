@@ -1,46 +1,3 @@
-<script>
-import songList from '../data/songs'
-import {auth} from "/auth.js"
-import IconHeart from '../components/icons/IconHeart.vue';
-export default {
-  components: { IconHeart, },
-  data() {
-    return {
-      search: '',
-      show_favorites: false,
-      songs: songList,
-      active: true,
-      isFavorite: false,
-    }
-  },
-  methods: {
-    handleScroll(event) {
-      this.$refs.header.classList.value = event.target.scrollTop > 100 ? 'scrolled' : '';
-    },
-    setFavoriteBtn() {
-      if (this.show_favorites == false) {
-        this.show_favorites = true;
-      } else {
-        this.show_favorites = false;
-      }
-    },
-    getTime(time_ms) {
-      var minutes = Math.floor(time_ms / 60000);
-      var seconds = ((time_ms % 60000) / 1000).toFixed(0);
-      return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-    },
-    getArtists(artists) {
-      return artists[0].name;
-    },
-  },
-  computed: {
-    filtered_songs() {
-      return this.songs;
-    },
-  }
-}
-</script>
-
 <template>
   <div id="songs-view" @scroll="handleScroll">
     <div class="wrapper-header">
@@ -91,3 +48,55 @@ export default {
     </div>
   </div>
 </template>
+
+<script>
+import songList from '../data/songs'
+import IconHeart from '../components/icons/IconHeart.vue';
+export default {
+  components: { IconHeart, },
+  data() {
+    return {
+      search: '',
+      show_favorites: false,
+      songs: songList,
+      active: true,
+      isFavorite: false,
+    }
+  },
+  methods: {
+    handleScroll(event) {
+      this.$refs.header.classList.value = event.target.scrollTop > 100 ? 'scrolled' : '';
+    },
+    setFavoriteBtn() {
+      if (this.show_favorites == false) {
+        this.show_favorites = true;
+      } else {
+        this.show_favorites = false;
+      }
+    },
+    getTime(time_ms) {
+      var minutes = Math.floor(time_ms / 60000);
+      var seconds = ((time_ms % 60000) / 1000).toFixed(0);
+      return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    },
+    getArtists(artists) {
+      let temp = '';
+      let len = Object.keys(artists).length;
+
+      artists.forEach((art, index) => {
+        if (index != len - 1) {
+          temp = temp + art.name + ", ";
+        } else {
+          temp = temp + art.name;
+        }
+      });
+      return temp;
+    },
+  },
+  computed: {
+    filtered_songs() {
+      return this.songs;
+    },
+  }
+}
+</script>

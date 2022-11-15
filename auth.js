@@ -24,21 +24,22 @@ export const auth = reactive ({
     },
     logout(){
         localStorage.clear();
-    is_authenticated = false;
+        this.is_authenticated = false;
         router.replace('/login')
     },
-    toggleFavorite(songID){
-       for(i = 0; i<=this.favorite_songs.length; i++){
-            if(this.favorite_songs[i] != songID){
-                this.favorite_songs.push(this.favorite_songs[i])
-            }
-            else{
-                this.favorite_songs.remove(this.favorite_songs[i])
-            }
-        }
-    },
-    getFavoriteSongs(){
+
+    toggleFavorite(songID) {
+        this.user.favorite_songs.forEach((song) => {
+          if (song != songID) {
+            this.user.favorite_songs.push(songID);
+          } else {
+            this.user.favorite_songs.pop(songID);
+          }
+        });
+      },
+    
+      getFavoriteSongs() {
         return this.user.favorite_songs;
-    }
-});
+      }
+    });
 

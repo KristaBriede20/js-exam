@@ -7,7 +7,7 @@ export const player = reactive({
         this.playlist.push(songs); //ar push masivam pievieno mainigo
     },
     setNowPlaying(song) {
-       
+        this.now_playing = song;
     },
     getNowPlayingSongId() {
         return this.now_playing?.id;
@@ -31,12 +31,36 @@ export const player = reactive({
     getNowPlayingSongPreview() {
         return this.now_playing?.preview_url;
     },
-    getNextSong(){
-      
-    },
-    getPreviousSong() {
-       
-    },
+    getNextSong() {
+        var index;
+    
+        this.playlist.forEach((song, indexTemp) => {
+          if (song?.id == this.now_playing?.id) {
+            index = indexTemp;
+          }
+        });
+    
+        if (this.playlist.length > index + 1) {
+          return false;
+        } else {
+          return this.playlist[index + 1];
+        }
+      },
+      getPreviousSong() {
+        var index;
+    
+        this.playlist.forEach((song, indexTemp) => {
+          if (song?.id == this.now_playing?.id) {
+            index = indexTemp;
+          }
+        });
+    
+        if (this.playlist.length < index - 1) {
+          return false;
+        } else {
+          return this.playlist[index - 1];
+        }
+      },
     resetNowPlaying() {
         this.now_playing = {};
     }
