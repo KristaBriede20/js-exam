@@ -1,62 +1,3 @@
-<script>
-import songList from '../data/songs'
-import { player } from '../stores/player'
-import { auth } from '../../auth';
-import IconHeart from '../components/icons/IconHeart.vue';
-import IconPlay from '../components/icons/IconPlay.vue';
-export default {
-  components: { IconHeart, IconPlay, },
-  data() {
-    return {
-      player,
-      auth,
-      search: '',
-      show_favorites: false,
-      songs: songList,
-    }
-  },
-  methods: {
-    handleScroll(event) {
-      this.$refs.header.classList.value = event.target.scrollTop > 100 ? 'scrolled' : '';
-    },
-    
-    getTime(time_ms) {
-      var minutes = Math.floor(time_ms / 60000);
-      var seconds = ((time_ms % 60000) / 1000).toFixed(0);
-      return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-    },
-    getArtists(artists) {
-      let i = '';
-      let len = Object.keys(artists).length;
-      artists.forEach((art, index) => {
-        if (index != len - 1) {
-          i = i + art.name + ", ";
-        } else {
-          i = i + art.name;
-        }
-      });
-      return i;
-    },
-    selectSong(song) {
-      player.setNowPlaying(song);
-    },
-    sortBy() {
-    }
-  },
-  computed: {
-    filtered_songs() {
-      let tests = this.songs;
-      let i = [];
-      
-      i = tests.filter((song) => {
-        return song.name.toLowerCase().includes(this.search.toLowerCase())
-      });
-      return i;
-    },
-  }
-}
-</script>
-
 <template>
   <div id="songs-view" @scroll="handleScroll">
     <div class="wrapper-header">
@@ -106,3 +47,69 @@ export default {
     </div>
   </div>
 </template>
+
+<script>
+import songList from '../data/songs'
+
+import { player } from '../stores/player'
+import { auth } from '../../auth';
+
+import IconHeart from '../components/icons/IconHeart.vue';
+import IconPlay from '../components/icons/IconPlay.vue';
+
+export default {
+  components: { IconHeart, IconPlay, },
+  data() {
+    return {
+      player,
+      auth,
+      search: '',
+      show_favorites: false,
+      songs: songList,
+    }
+  },
+  methods: {
+    handleScroll(event) {
+      this.$refs.header.classList.value = event.target.scrollTop > 100 ? 'scrolled' : '';
+    },
+    
+    //no mili sec uz minutem un sekundem
+    getTime(time_ms) {
+      var minutes = Math.floor(time_ms / 60000);
+      var seconds = ((time_ms % 60000) / 1000).toFixed(0);
+      return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    },
+
+        //no dziesmas objekta artist masiva atgriez izpilditaja vardu viena string
+    getArtists(artists) {
+      let i = '';
+      let len = Object.keys(artists).length;
+      artists.forEach((art, index) => {
+        if (index != len - 1) {
+          i = i + art.name + ", ";
+        } else {
+          i = i + art.name;
+        }
+      });
+      return i;
+    },
+
+    selectSong(song) {
+      player.setNowPlaying(song);
+    },
+  },
+//search atgriez dziesmu kas sakrit search loga ievadito parametru
+  computed: {
+    filtered_songs() {
+      let y = this.songs;
+      let i = [];
+      
+      i = y.filter((song) => {
+        return song.name.toLowerCase().includes(this.search.toLowerCase())
+      });
+      return i;
+    },
+  }
+}
+</script>
+

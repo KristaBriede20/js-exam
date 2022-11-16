@@ -59,6 +59,8 @@ export default {
     }
   },
   methods: {
+
+    //funkcijas, kas tiek palaistas pie pogu nosiesanas
       editButn() {
           this.groupOne = true;
         this.groupTwo = false;
@@ -72,6 +74,8 @@ export default {
           this.groupTwo = true;
           this.auth.setUserData(this.newName, this.newSurname, this.newCode);
       },
+
+      //no dziesmas objekta artist masiva atgriez izpilditaja vardu viena string
       getArtists(artists) {
       let i = '';
       let len = Object.keys(artists).length;
@@ -86,6 +90,7 @@ export default {
     },
   },
   
+  //iziet cauri dziesmu masivam salidzinot id ar favorite dziesmu id
   computed: {
     favSongs() {
       let favSongs = [];
